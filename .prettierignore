@@ -1,0 +1,7 @@
+node_modules
+# Ignore artifacts:
+dist
+*.min.*
+test/data/*
+*.md
+.github

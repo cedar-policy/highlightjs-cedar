@@ -1,0 +1,33 @@
+{
+  "name": "highlightjs-cedar",
+  "version": "0.2.0",
+  "description": "highlight.js support for Cedar policy syntax",
+  "author": "cedar-policy",
+  "license": "Apache-2.0",
+  "repository": {
+    "url": "https://github.com/cedar-policy/highlightjs-cedar"
+  },
+  "main": "src/cedar.js",
+  "scripts": {
+    "dev": "cd test/vite && vite",
+    "test": "npm run prettier && vitest",
+    "prettier": "prettier --check .",
+    "testdata": "cd test && node update-html-files.js",
+    "build": "npm run buildjs && npm run buildmin && npm run buildesm && npm run buildcjs",
+    "buildjs": "esbuild src/webbundle.js --outfile=dist/hljs-cedar.js --bundle",
+    "buildmin": "esbuild src/webbundle.js --outfile=dist/hljs-cedar.min.js --bundle --minify",
+    "buildesm": "esbuild src/cedar.js --outfile=dist/hljs-cedar.mjs --format=esm",
+    "buildcjs": "esbuild src/cedar.js --outfile=dist/hljs-cedar.cjs --format=cjs"
+  },
+  "keywords": [
+    "highlightjs",
+    "highlight",
+    "cedar"
+  ],
+  "devDependencies": {
+    "highlight.js": "^11.8.0",
+    "prettier": "^3.0.3",
+    "vite": "^4.4.9",
+    "vitest": "^0.34.4"
+  }
+}
