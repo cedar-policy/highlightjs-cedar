@@ -55,6 +55,7 @@ export default function (hljs) {
         'in',
         'like',
         'has',
+        'is',
       ].join('|') +
       ')' +
       /(?!\w)/.source,
@@ -66,6 +67,19 @@ export default function (hljs) {
     scope: 'number',
     begin: `0|\-?[1-9](_?[0-9])*`,
     relevance: 0,
+  };
+
+  const ENTITIES = {
+    match: /(?=\b)(([_a-zA-Z][_a-zA-Z0-9]*::)*[_a-zA-Z][_a-zA-Z0-9]*)(?=::)/,
+    scope: 'title.class',
+  };
+
+  const ISENTITY = {
+    match: [/is/, /\s+/, /([_a-zA-Z][_a-zA-Z0-9]*::)*[_a-zA-Z][_a-zA-Z0-9]*/],
+    scope: {
+      1: 'operator',
+      3: 'title.class',
+    },
   };
 
   const METHODS = {
@@ -99,6 +113,8 @@ export default function (hljs) {
       POLICY,
       INTEGER,
       PUNCTUATION,
+      ENTITIES,
+      ISENTITY,
       OPERATORS,
       METHODS,
       DECIMAL_METHODS,
