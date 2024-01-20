@@ -6,20 +6,29 @@ Description: Cedar is a language for writing authorization policies and making a
 Website: https://www.cedarpolicy.com/
 */
 export default function (hljs) {
-  const GLOBALS = ['decimal', 'ip'];
+  const GLOBALS = {
+    match: /\b(?:ip|decimal)(?=\()/,
+    scope: 'built_in',
+  };
 
-  const VARIABLES = ['principal', 'action', 'resource', 'context'];
+  const VARIABLES = {
+    match: /\b(?<!\.)(principal|action|resource|context)\b/,
+    scope: 'variable',
+  };
 
   const TEMPLATES = {
     match: /(?:\?resource|\?principal)\b/,
     scope: 'template-variable',
   };
 
+  const POLICY = {
+    match: /\b(?<!\.)(permit|forbid|when|unless)\b/,
+    scope: 'keyword',
+  };
+
   const KEYWORDS = {
-    keyword: ['permit', 'forbid', 'when', 'unless', 'if', 'then', 'else'],
+    keyword: ['if', 'then', 'else'],
     literal: ['true', 'false'],
-    built_in: GLOBALS,
-    variable: VARIABLES,
   };
 
   const PUNCTUATION = {
@@ -85,6 +94,9 @@ export default function (hljs) {
     contains: [
       hljs.QUOTE_STRING_MODE,
       hljs.C_LINE_COMMENT_MODE,
+      GLOBALS,
+      VARIABLES,
+      POLICY,
       INTEGER,
       PUNCTUATION,
       OPERATORS,

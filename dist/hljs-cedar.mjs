@@ -1,17 +1,25 @@
 //! Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
 //! SPDX-License-Identifier: Apache-2.0
 function cedar_default(hljs) {
-  const GLOBALS = ["decimal", "ip"];
-  const VARIABLES = ["principal", "action", "resource", "context"];
+  const GLOBALS = {
+    match: /\b(?:ip|decimal)(?=\()/,
+    scope: "built_in"
+  };
+  const VARIABLES = {
+    match: /\b(?<!\.)(principal|action|resource|context)\b/,
+    scope: "variable"
+  };
   const TEMPLATES = {
     match: /(?:\?resource|\?principal)\b/,
     scope: "template-variable"
   };
+  const POLICY = {
+    match: /\b(?<!\.)(permit|forbid|when|unless)\b/,
+    scope: "keyword"
+  };
   const KEYWORDS = {
-    keyword: ["permit", "forbid", "when", "unless", "if", "then", "else"],
-    literal: ["true", "false"],
-    built_in: GLOBALS,
-    variable: VARIABLES
+    keyword: ["if", "then", "else"],
+    literal: ["true", "false"]
   };
   const PUNCTUATION = {
     match: /(?:,|;|\.|\[|\]|\(|\)|{|})/,
@@ -65,6 +73,9 @@ function cedar_default(hljs) {
     contains: [
       hljs.QUOTE_STRING_MODE,
       hljs.C_LINE_COMMENT_MODE,
+      GLOBALS,
+      VARIABLES,
+      POLICY,
       INTEGER,
       PUNCTUATION,
       OPERATORS,
