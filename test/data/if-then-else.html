@@ -1,7 +1,7 @@
 <span class="hljs-keyword">permit</span> <span class="hljs-punctuation">(</span>
   <span class="hljs-variable">principal</span><span class="hljs-punctuation">,</span>
-  <span class="hljs-variable">action</span> <span class="hljs-operator">==</span> NameSpace::Action::<span class="hljs-string">&quot;readObjects&quot;</span><span class="hljs-punctuation">,</span>
-  <span class="hljs-variable">resource</span> <span class="hljs-operator">in</span> NameSpace::Container::<span class="hljs-string">&quot;container&quot;</span>
+  <span class="hljs-variable">action</span> <span class="hljs-operator">==</span> <span class="hljs-title class_">NameSpace::Action</span>::<span class="hljs-string">&quot;readObjects&quot;</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-variable">resource</span> <span class="hljs-operator">in</span> <span class="hljs-title class_">NameSpace::Container</span>::<span class="hljs-string">&quot;container&quot;</span>
 <span class="hljs-punctuation">)</span>
 <span class="hljs-keyword">when</span> <span class="hljs-punctuation">{</span> <span class="hljs-variable">resource</span><span class="hljs-punctuation">.</span>tenant <span class="hljs-operator">==</span> <span class="hljs-variable">principal</span><span class="hljs-punctuation">.</span>custom<span class="hljs-punctuation">.</span>tenant_id <span class="hljs-punctuation">}</span>
 <span class="hljs-keyword">when</span>
