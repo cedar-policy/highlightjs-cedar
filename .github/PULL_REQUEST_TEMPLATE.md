@@ -16,7 +16,3 @@ I confirm that this PR (choose one, and delete the other options):
 
 - [ ] Updates the CHANGELOG with a description of my change (required for version bumps).
 - [ ] Does not update the CHANGELOG because my change does not significantly impact released code.
-
-## Disclaimer
-
-By submitting this pull request, I confirm that you can use, modify, copy, and redistribute this contribution, under the terms of your choice.
