@@ -20,7 +20,7 @@ __export(cedar_exports, {
   default: () => cedar_default
 });
 module.exports = __toCommonJS(cedar_exports);
-//! Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
+//! Copyright Cedar Contributors
 //! SPDX-License-Identifier: Apache-2.0
 function cedar_default(hljs) {
   const GLOBALS = {

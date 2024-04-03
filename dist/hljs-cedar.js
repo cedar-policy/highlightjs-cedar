@@ -104,5 +104,5 @@
   // src/webbundle.js
   window.hljsCedar = cedar_default;
 })();
-//! Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
+//! Copyright Cedar Contributors
 //! SPDX-License-Identifier: Apache-2.0
