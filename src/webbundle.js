@@ -1,5 +1,6 @@
 //! Copyright Cedar Contributors
 //! SPDX-License-Identifier: Apache-2.0
-import hljsCedar from './cedar';
+import { hljsCedar, hljsCedarschema } from './cedar';
 
 window.hljsCedar = hljsCedar;
+window.hljsCedarschema = hljsCedarschema;

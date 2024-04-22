@@ -4,25 +4,34 @@
  * vitest script of ECMAScript module version of highlightjs-cedar
  */
 import { describe, expect, it } from 'vitest';
-import * as path from 'path';
-import * as fs from 'fs';
+import * as path from 'node:path';
+import * as fs from 'node:fs';
 import hljs from 'highlight.js';
-import hljsCedar from '../dist/hljs-cedar.mjs';
+import hljsCedar, { hljsCedarschema } from '../dist/hljs-cedar.mjs';
 
 hljs.registerLanguage('cedar', hljsCedar);
+hljs.registerLanguage('cedarschema', hljsCedarschema);
 
-describe('data/*.cedar files', () => {
+const processLanguage = (language) => {
   const files = fs
     .readdirSync(path.join(__dirname, 'data'))
-    .filter((f) => f.endsWith('.cedar'));
+    .filter((f) => f.endsWith(`.${language}`));
   files.forEach((file) => {
     it(file, () => {
       const code = fs.readFileSync(path.join(__dirname, 'data', file), 'utf8');
-      const result = hljs.highlight(code, { language: 'cedar' }).value;
+      const result = hljs.highlight(code, { language: language }).value;
 
       expect(result).toMatchFileSnapshot(
-        path.join(__dirname, 'data', file.replace('.cedar', '.html')),
+        path.join(__dirname, 'data', file.replace(`.${language}`, '.html')),
       );
     });
   });
+};
+
+describe('data/*.cedar files', () => {
+  processLanguage('cedar');
+});
+
+describe('data/*.cedarschema files', () => {
+  processLanguage('cedarschema');
 });

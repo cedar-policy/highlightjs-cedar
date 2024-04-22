@@ -5,7 +5,7 @@ Language: Cedar
 Description: Cedar is a language for writing authorization policies and making authorization decisions based on those policies.
 Website: https://www.cedarpolicy.com/
 */
-export default function (hljs) {
+export function hljsCedar(hljs) {
   const GLOBALS = {
     match: /\b(?:ip|decimal)(?=\()/,
     scope: 'built_in',
@@ -123,3 +123,49 @@ export default function (hljs) {
     ],
   };
 }
+
+export function hljsCedarschema(hljs) {
+  const KEYWORDS = {
+    match: /\b(?:namespace|type|entity|action)(?=\s+)/,
+    scope: 'keyword',
+  };
+
+  const MOREKEYWORDS = {
+    begin: '\\b(?:in)\\b|\\b(?:appliesTo)(?=\\s*{)',
+    scope: 'keyword',
+  };
+
+  const OPERATORS = {
+    begin: '=',
+    scope: 'operator',
+  };
+
+  const PUNCTUATION = {
+    begin: '{|}|\\[|]|;',
+    scope: 'punctuation',
+  };
+
+  const ATTRS = {
+    begin: /\b(?:[_a-zA-Z][_a-zA-Z0-9]*)(?=[?]?:(?!:))/,
+    scope: 'property',
+  };
+
+  return {
+    name: 'Cedar schema',
+    aliases: ['cedarschema'],
+    case_insensitive: false,
+    contains: [
+      hljs.QUOTE_STRING_MODE,
+      hljs.C_LINE_COMMENT_MODE,
+      KEYWORDS,
+      MOREKEYWORDS,
+      OPERATORS,
+      PUNCTUATION,
+      ATTRS,
+    ],
+  };
+}
+
+// default export to support backward compatibility
+// import hljsCedar from './cedar';
+export default hljsCedar;

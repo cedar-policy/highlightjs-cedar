@@ -17,12 +17,14 @@ var __copyProps = (to, from, except, desc) => {
 var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
 var cedar_exports = {};
 __export(cedar_exports, {
-  default: () => cedar_default
+  default: () => cedar_default,
+  hljsCedar: () => hljsCedar,
+  hljsCedarschema: () => hljsCedarschema
 });
 module.exports = __toCommonJS(cedar_exports);
 //! Copyright Cedar Contributors
 //! SPDX-License-Identifier: Apache-2.0
-function cedar_default(hljs) {
+function hljsCedar(hljs) {
   const GLOBALS = {
     match: /\b(?:ip|decimal)(?=\()/,
     scope: "built_in"
@@ -122,3 +124,40 @@ function cedar_default(hljs) {
     ]
   };
 }
+function hljsCedarschema(hljs) {
+  const KEYWORDS = {
+    match: /\b(?:namespace|type|entity|action)(?=\s+)/,
+    scope: "keyword"
+  };
+  const MOREKEYWORDS = {
+    begin: "\\b(?:in)\\b|\\b(?:appliesTo)(?=\\s*{)",
+    scope: "keyword"
+  };
+  const OPERATORS = {
+    begin: "=",
+    scope: "operator"
+  };
+  const PUNCTUATION = {
+    begin: "{|}|\\[|]|;",
+    scope: "punctuation"
+  };
+  const ATTRS = {
+    begin: /\b(?:[_a-zA-Z][_a-zA-Z0-9]*)(?=[?]?:(?!:))/,
+    scope: "property"
+  };
+  return {
+    name: "Cedar schema",
+    aliases: ["cedarschema"],
+    case_insensitive: false,
+    contains: [
+      hljs.QUOTE_STRING_MODE,
+      hljs.C_LINE_COMMENT_MODE,
+      KEYWORDS,
+      MOREKEYWORDS,
+      OPERATORS,
+      PUNCTUATION,
+      ATTRS
+    ]
+  };
+}
+var cedar_default = hljsCedar;

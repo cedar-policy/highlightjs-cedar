@@ -1,6 +1,6 @@
 (() => {
   // src/cedar.js
-  function cedar_default(hljs) {
+  function hljsCedar(hljs) {
     const GLOBALS = {
       match: /\b(?:ip|decimal)(?=\()/,
       scope: "built_in"
@@ -100,9 +100,46 @@
       ]
     };
   }
+  function hljsCedarschema(hljs) {
+    const KEYWORDS = {
+      match: /\b(?:namespace|type|entity|action)(?=\s+)/,
+      scope: "keyword"
+    };
+    const MOREKEYWORDS = {
+      begin: "\\b(?:in)\\b|\\b(?:appliesTo)(?=\\s*{)",
+      scope: "keyword"
+    };
+    const OPERATORS = {
+      begin: "=",
+      scope: "operator"
+    };
+    const PUNCTUATION = {
+      begin: "{|}|\\[|]|;",
+      scope: "punctuation"
+    };
+    const ATTRS = {
+      begin: /\b(?:[_a-zA-Z][_a-zA-Z0-9]*)(?=[?]?:(?!:))/,
+      scope: "property"
+    };
+    return {
+      name: "Cedar schema",
+      aliases: ["cedarschema"],
+      case_insensitive: false,
+      contains: [
+        hljs.QUOTE_STRING_MODE,
+        hljs.C_LINE_COMMENT_MODE,
+        KEYWORDS,
+        MOREKEYWORDS,
+        OPERATORS,
+        PUNCTUATION,
+        ATTRS
+      ]
+    };
+  }
 
   // src/webbundle.js
-  window.hljsCedar = cedar_default;
+  window.hljsCedar = hljsCedar;
+  window.hljsCedarschema = hljsCedarschema;
 })();
 //! Copyright Cedar Contributors
 //! SPDX-License-Identifier: Apache-2.0
