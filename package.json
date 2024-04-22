@@ -1,7 +1,7 @@
 {
   "name": "highlightjs-cedar",
-  "version": "0.3.0",
-  "description": "highlight.js support for Cedar policy syntax",
+  "version": "0.4.0",
+  "description": "highlight.js support for Cedar policy and Cedar human-readable schema syntax",
   "author": "cedar-policy",
   "license": "Apache-2.0",
   "repository": {
@@ -13,21 +13,23 @@
     "test": "npm run prettier && vitest",
     "prettier": "prettier --check .",
     "testdata": "cd test && node update-html-files.js",
-    "build": "npm run buildjs && npm run buildmin && npm run buildesm && npm run buildcjs",
+    "build": "npm run buildjs && npm run buildmin && npm run buildesm && npm run buildcjs && npm run buildmincss",
     "buildjs": "esbuild src/webbundle.js --outfile=dist/hljs-cedar.js --bundle",
     "buildmin": "esbuild src/webbundle.js --outfile=dist/hljs-cedar.min.js --bundle --minify",
     "buildesm": "esbuild src/cedar.js --outfile=dist/hljs-cedar.mjs --format=esm",
-    "buildcjs": "esbuild src/cedar.js --outfile=dist/hljs-cedar.cjs --format=cjs"
+    "buildcjs": "esbuild src/cedar.js --outfile=dist/hljs-cedar.cjs --format=cjs",
+    "buildmincss": "esbuild src/github.css --outfile=dist/github.min.css --minify"
   },
   "keywords": [
     "highlightjs",
     "highlight",
-    "cedar"
+    "cedar",
+    "cedarschema"
   ],
   "devDependencies": {
     "highlight.js": "^11.9.0",
     "prettier": "^3.2.5",
-    "vite": "^5.2.8",
-    "vitest": "^1.4.0"
+    "vite": "^5.2.10",
+    "vitest": "^1.5.0"
   }
 }

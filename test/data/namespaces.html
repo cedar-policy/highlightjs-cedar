@@ -1,0 +1,37 @@
+<span class="hljs-comment">// nicely formatted with spaces</span>
+<span class="hljs-keyword">namespace</span> N1 <span class="hljs-punctuation">{</span>
+  <span class="hljs-keyword">type</span> C <span class="hljs-operator">=</span> <span class="hljs-punctuation">{</span>
+    <span class="hljs-property">a</span>: String
+  <span class="hljs-punctuation">}</span><span class="hljs-punctuation">;</span>
+  <span class="hljs-keyword">entity</span> E<span class="hljs-punctuation">;</span>
+  <span class="hljs-keyword">action</span> a1 <span class="hljs-keyword">appliesTo</span> <span class="hljs-punctuation">{</span>
+    <span class="hljs-property">principal</span>: <span class="hljs-punctuation">[</span>E<span class="hljs-punctuation">]</span>,
+    <span class="hljs-property">resource</span>: <span class="hljs-punctuation">[</span>E<span class="hljs-punctuation">]</span>,
+    <span class="hljs-property">context</span>: <span class="hljs-punctuation">{</span><span class="hljs-punctuation">}</span>
+  <span class="hljs-punctuation">}</span><span class="hljs-punctuation">;</span>
+  <span class="hljs-keyword">action</span> a2 <span class="hljs-keyword">appliesTo</span> <span class="hljs-punctuation">{</span>
+    <span class="hljs-property">principal</span>: <span class="hljs-punctuation">[</span>N2::E<span class="hljs-punctuation">]</span>,
+    <span class="hljs-property">resource</span>: <span class="hljs-punctuation">[</span>N2::E<span class="hljs-punctuation">]</span>,
+    <span class="hljs-property">context</span>: <span class="hljs-punctuation">{</span><span class="hljs-punctuation">}</span>
+  <span class="hljs-punctuation">}</span><span class="hljs-punctuation">;</span>
+<span class="hljs-punctuation">}</span>
+
+<span class="hljs-comment">// no spaces still valid and should highlight</span>
+<span class="hljs-keyword">namespace</span> N2 <span class="hljs-punctuation">{</span>
+  <span class="hljs-keyword">type</span> C<span class="hljs-operator">=</span><span class="hljs-punctuation">{</span><span class="hljs-string">&quot;a&quot;</span>:String<span class="hljs-punctuation">}</span><span class="hljs-punctuation">;</span>
+  <span class="hljs-keyword">entity</span> E<span class="hljs-punctuation">;</span>
+  <span class="hljs-keyword">action</span> <span class="hljs-string">&quot;a1&quot;</span> <span class="hljs-keyword">appliesTo</span> <span class="hljs-punctuation">{</span>
+    <span class="hljs-property">principal</span>:<span class="hljs-punctuation">[</span>N1::E<span class="hljs-punctuation">]</span>,
+    <span class="hljs-property">resource</span>:<span class="hljs-punctuation">[</span>N1::E<span class="hljs-punctuation">]</span>,
+    <span class="hljs-property">context</span>:<span class="hljs-punctuation">{</span><span class="hljs-punctuation">}</span>
+  <span class="hljs-punctuation">}</span><span class="hljs-punctuation">;</span>
+  <span class="hljs-keyword">action</span> <span class="hljs-string">&quot;astar&quot;</span> <span class="hljs-keyword">in</span><span class="hljs-punctuation">[</span>N1::Action::<span class="hljs-string">&quot;a1&quot;</span>, N1::Action::<span class="hljs-string">&quot;a2&quot;</span>,a1,a2<span class="hljs-punctuation">]</span><span class="hljs-keyword">appliesTo</span><span class="hljs-punctuation">{</span><span class="hljs-property">context</span>:<span class="hljs-punctuation">{</span><span class="hljs-punctuation">}</span><span class="hljs-punctuation">}</span><span class="hljs-punctuation">;</span>
+  <span class="hljs-keyword">action</span> <span class="hljs-string">&quot;a2&quot;</span> <span class="hljs-keyword">appliesTo</span> <span class="hljs-punctuation">{</span>
+    <span class="hljs-property">principal</span>:<span class="hljs-punctuation">[</span>E<span class="hljs-punctuation">]</span>,
+    <span class="hljs-property">resource</span>:<span class="hljs-punctuation">[</span>E<span class="hljs-punctuation">]</span>,
+    <span class="hljs-property">context</span>:<span class="hljs-punctuation">{</span><span class="hljs-punctuation">}</span>
+  <span class="hljs-punctuation">}</span><span class="hljs-punctuation">;</span>
+<span class="hljs-punctuation">}</span>
+
+<span class="hljs-comment">// no namespace</span>
+<span class="hljs-keyword">entity</span> Y<span class="hljs-punctuation">;</span>

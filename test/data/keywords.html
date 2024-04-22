@@ -1,0 +1,11 @@
+<span class="hljs-comment">// https://docs.cedarpolicy.com/schema/human-readable-schema-grammar.html</span>
+<span class="hljs-keyword">namespace</span> NS <span class="hljs-punctuation">{</span>
+  <span class="hljs-keyword">type</span> T <span class="hljs-operator">=</span> <span class="hljs-punctuation">{</span><span class="hljs-string">&quot;type&quot;</span>: __cedar::String, <span class="hljs-property">namespace</span>: String<span class="hljs-punctuation">}</span><span class="hljs-punctuation">;</span>
+  <span class="hljs-keyword">entity</span> E <span class="hljs-keyword">in</span> E <span class="hljs-operator">=</span> <span class="hljs-punctuation">{</span><span class="hljs-property">action</span>: String<span class="hljs-punctuation">}</span><span class="hljs-punctuation">;</span>
+  <span class="hljs-keyword">entity</span> R <span class="hljs-keyword">in</span> <span class="hljs-punctuation">[</span>R<span class="hljs-punctuation">]</span> <span class="hljs-operator">=</span> <span class="hljs-punctuation">{</span><span class="hljs-property">entity</span>: E<span class="hljs-punctuation">}</span><span class="hljs-punctuation">;</span>
+  <span class="hljs-keyword">action</span> <span class="hljs-string">&quot;a&quot;</span> <span class="hljs-keyword">appliesTo</span> <span class="hljs-punctuation">{</span>
+    <span class="hljs-property">principal</span>: <span class="hljs-punctuation">[</span>NS::E<span class="hljs-punctuation">]</span>,
+    <span class="hljs-property">resource</span>: <span class="hljs-punctuation">[</span>NS::R<span class="hljs-punctuation">]</span>,
+    <span class="hljs-property">context</span>: <span class="hljs-punctuation">{</span><span class="hljs-punctuation">}</span>
+  <span class="hljs-punctuation">}</span><span class="hljs-punctuation">;</span>
+<span class="hljs-punctuation">}</span>
