@@ -1,0 +1,8 @@
+<span class="hljs-comment">// inspired by https://www.cedarpolicy.com/blog/cedar-for-kubernetes</span>
+<span class="hljs-keyword">forbid</span> <span class="hljs-punctuation">(</span>
+    <span class="hljs-variable">principal</span> <span class="hljs-operator">is</span> <span class="hljs-title class_">k8s::User</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-variable">action</span> <span class="hljs-operator">in</span> <span class="hljs-punctuation">[</span><span class="hljs-title class_">k8s::Action</span>::<span class="hljs-string">&quot;list&quot;</span><span class="hljs-punctuation">,</span> <span class="hljs-title class_">k8s::Action</span>::<span class="hljs-string">&quot;update&quot;</span><span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-variable">resource</span> <span class="hljs-operator">is</span> <span class="hljs-title class_">k8s::Resource</span>
+<span class="hljs-punctuation">)</span> <span class="hljs-keyword">when</span> <span class="hljs-punctuation">{</span>
+    <span class="hljs-variable">principal</span> <span class="hljs-operator">in</span> <span class="hljs-title class_">k8s::Group</span>::<span class="hljs-string">&quot;block-list&quot;</span>
+<span class="hljs-punctuation">}</span><span class="hljs-punctuation">;</span>
