@@ -1,4 +1,12 @@
 <span class="hljs-comment">// you &quot;must&quot; be 54&quot; tall to ride (wink)</span>
-@id<span class="hljs-punctuation">(</span><span class="hljs-string">&quot;54\&quot; rule&quot;</span><span class="hljs-punctuation">)</span> <span class="hljs-comment">// 54&quot; is 4&#x27; 6&quot; </span>
+@id<span class="hljs-punctuation">(</span><span class="hljs-string">&quot;54\&quot; rule&quot;</span><span class="hljs-punctuation">)</span> <span class="hljs-comment">// 54&quot; is 4&#x27; 6&quot;</span>
 <span class="hljs-keyword">forbid</span> <span class="hljs-punctuation">(</span><span class="hljs-variable">principal</span><span class="hljs-punctuation">,</span> <span class="hljs-variable">action</span><span class="hljs-punctuation">,</span> <span class="hljs-variable">resource</span><span class="hljs-punctuation">)</span>
-<span class="hljs-keyword">when</span> <span class="hljs-punctuation">{</span> <span class="hljs-variable">resource</span><span class="hljs-punctuation">.</span>restriction <span class="hljs-operator">==</span> <span class="hljs-string">&quot;54\&quot;&quot;</span> <span class="hljs-operator">&amp;&amp;</span> <span class="hljs-variable">principal</span><span class="hljs-punctuation">.</span>height <span class="hljs-operator">&lt;</span> <span class="hljs-number">54</span> <span class="hljs-punctuation">}</span><span class="hljs-punctuation">;</span>
+<span class="hljs-keyword">when</span>
+<span class="hljs-punctuation">{</span>
+  <span class="hljs-variable">resource</span><span class="hljs-punctuation">.</span>restriction <span class="hljs-operator">==</span> <span class="hljs-string">&quot;54\&quot;&quot;</span> <span class="hljs-operator">&amp;&amp;</span>
+  <span class="hljs-variable">principal</span><span class="hljs-punctuation">.</span>height <span class="hljs-operator">&lt;</span> <span class="hljs-number">54</span> <span class="hljs-operator">&amp;&amp;</span>
+  <span class="hljs-variable">principal</span><span class="hljs-punctuation">.</span>attrSet<span class="hljs-punctuation">.</span><span class="hljs-title function_ invoke__">contains</span><span class="hljs-punctuation">(</span><span class="hljs-punctuation">{</span>
+    <span class="hljs-string">&quot;key&quot;</span>: <span class="hljs-string">&quot;height&quot;</span><span class="hljs-punctuation">,</span> 
+    <span class="hljs-string">&quot;values&quot;</span>: <span class="hljs-punctuation">[</span><span class="hljs-string">&quot;54\&quot;&quot;</span><span class="hljs-punctuation">,</span> <span class="hljs-string">&quot;4&#x27; 6\&quot;&quot;</span><span class="hljs-punctuation">]</span>
+  <span class="hljs-punctuation">}</span><span class="hljs-punctuation">)</span>
+<span class="hljs-punctuation">}</span><span class="hljs-punctuation">;</span>

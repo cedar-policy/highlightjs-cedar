@@ -35,3 +35,24 @@
 
 <span class="hljs-comment">// no namespace</span>
 <span class="hljs-keyword">entity</span> Y<span class="hljs-punctuation">;</span>
+
+<span class="hljs-comment">// numeronym namespace (like k8s or i18n)</span>
+<span class="hljs-keyword">namespace</span> k8s <span class="hljs-punctuation">{</span>
+  <span class="hljs-keyword">entity</span> User <span class="hljs-keyword">in</span> Group<span class="hljs-punctuation">;</span>
+  <span class="hljs-keyword">entity</span> Group<span class="hljs-punctuation">;</span>
+  <span class="hljs-keyword">entity</span> Resource <span class="hljs-punctuation">{</span>
+    <span class="hljs-property">metadata</span>?: String
+  <span class="hljs-punctuation">}</span><span class="hljs-punctuation">;</span>
+  <span class="hljs-keyword">action</span> <span class="hljs-string">&quot;list&quot;</span> <span class="hljs-keyword">appliesTo</span> <span class="hljs-punctuation">{</span>
+    <span class="hljs-property">principal</span>: <span class="hljs-punctuation">[</span>k8s::User<span class="hljs-punctuation">]</span>,
+    <span class="hljs-property">resource</span>: <span class="hljs-punctuation">[</span>k8s::Resource<span class="hljs-punctuation">]</span>,
+    <span class="hljs-property">context</span>: <span class="hljs-punctuation">{</span><span class="hljs-punctuation">}</span>
+  <span class="hljs-punctuation">}</span><span class="hljs-punctuation">;</span>  
+  <span class="hljs-keyword">action</span> <span class="hljs-string">&quot;update&quot;</span> <span class="hljs-keyword">appliesTo</span> <span class="hljs-punctuation">{</span>
+    <span class="hljs-property">principal</span>: <span class="hljs-punctuation">[</span>k8s::User<span class="hljs-punctuation">]</span>,
+    <span class="hljs-property">resource</span>: <span class="hljs-punctuation">[</span>k8s::Resource<span class="hljs-punctuation">]</span>,
+    <span class="hljs-property">context</span>: <span class="hljs-punctuation">{</span>
+      <span class="hljs-property">oldObject</span>?: String
+    <span class="hljs-punctuation">}</span>
+  <span class="hljs-punctuation">}</span><span class="hljs-punctuation">;</span>
+<span class="hljs-punctuation">}</span>
