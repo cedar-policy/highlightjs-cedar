@@ -84,7 +84,7 @@ export function hljsCedar(hljs) {
 
   const METHODS = {
     scope: 'title.function.invoke',
-    begin: `(?=\.)(contains|containsAll|containsAny)(?=\\()`,
+    begin: `(?=\.)(contains|containsAll|containsAny|isEmpty|getTag|hasTag)(?=\\()`,
     relevance: 0,
   };
 
@@ -131,7 +131,7 @@ export function hljsCedarschema(hljs) {
   };
 
   const MOREKEYWORDS = {
-    begin: '\\b(?:in)\\b|\\b(?:appliesTo)(?=\\s*{)',
+    begin: '\\b(?:in)\\b|\\b(?:appliesTo)(?=\\s*{)|(?<=}\\s*)(?:tags)\\b',
     scope: 'keyword',
   };
 
