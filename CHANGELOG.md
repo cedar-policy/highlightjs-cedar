@@ -2,6 +2,10 @@
 
 All notable changes to this project will be documented in this file.
 
+## v0.5.0 2025-02-15
+
+- Add Cedar 4.x support
+
 ## v0.4.0 2024-04-20
 
 - Add Cedar human-readable schema support
