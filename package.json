@@ -1,7 +1,7 @@
 {
   "name": "highlightjs-cedar",
   "version": "0.5.0",
-  "description": "highlight.js support for Cedar policy and Cedar human-readable schema syntax",
+  "description": "highlight.js support for Cedar policy and Cedar schema syntax",
   "author": "cedar-policy",
   "license": "Apache-2.0",
   "repository": {
@@ -30,6 +30,6 @@
     "highlight.js": "^11.11.1",
     "prettier": "^3.5.1",
     "vite": "^5.4.14",
-    "vitest": "^3.0.5"
+    "vitest": "^3.0.6"
   }
 }

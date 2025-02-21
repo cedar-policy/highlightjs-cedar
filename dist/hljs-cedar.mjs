@@ -2,7 +2,7 @@
 //! SPDX-License-Identifier: Apache-2.0
 function hljsCedar(hljs) {
   const GLOBALS = {
-    match: /\b(?:ip|decimal)(?=\()/,
+    match: /\b(?:ip|decimal|datetime|duration)(?=\()/,
     scope: "built_in"
   };
   const VARIABLES = {
@@ -77,6 +77,16 @@ function hljsCedar(hljs) {
     begin: `(?=.)(isIpv4|isIpv6|isLoopback|isMulticast|isInRange)(?=\\()`,
     relevance: 0
   };
+  const DATETIME_METHODS = {
+    scope: "title.function.invoke",
+    begin: `(?=.)(offset|durationSince|toDate|toTime)(?=\\()`,
+    relevance: 0
+  };
+  const DURATION_METHODS = {
+    scope: "title.function.invoke",
+    begin: `(?=.)(toMilliseconds|toSeconds|toMinutes|toHours|toDays)(?=\\()`,
+    relevance: 0
+  };
   return {
     name: "Cedar",
     aliases: ["cedar"],
@@ -96,6 +106,8 @@ function hljsCedar(hljs) {
       METHODS,
       DECIMAL_METHODS,
       IP_METHODS,
+      DATETIME_METHODS,
+      DURATION_METHODS,
       TEMPLATES
     ]
   };

@@ -1,6 +1,6 @@
-# highlight.js support for Cedar policy language and Cedar human-readable schema
+# highlight.js support for Cedar policy language and Cedar schema
 
-[highlight.js](https://highlightjs.org/) (syntax highlighting for the Web) support for Cedar based on [Grammar specification for Cedar policy syntax](https://docs.cedarpolicy.com/syntax-grammar.html) and for Cedar human-readable schema based on [Grammar specification for human-readable schemas](https://docs.cedarpolicy.com/schema/human-readable-schema-grammar.html). Project structure derived from [language contributor checklist](https://highlightjs.readthedocs.io/en/latest/language-contribution.html) and mapped to the [Stylable Scopes](https://highlightjs.readthedocs.io/en/latest/css-classes-reference.html).
+[highlight.js](https://highlightjs.org/) (syntax highlighting for the Web) support for Cedar based on [Grammar specification for Cedar policy syntax](https://docs.cedarpolicy.com/syntax-grammar.html) and for Cedar schema based on [Grammar specification for Cedar schemas](https://docs.cedarpolicy.com/schema/human-readable-schema-grammar.html). Project structure derived from [language contributor checklist](https://highlightjs.readthedocs.io/en/latest/language-contribution.html) and mapped to the [Stylable Scopes](https://highlightjs.readthedocs.io/en/latest/css-classes-reference.html).
 
 See it in action on <https://docs.cedarpolicy.com/>
 
@@ -52,7 +52,7 @@ The `npm run build` script uses [esbuild](https://esbuild.github.io/api/)to crea
 ### Test
 
 `npm run test` uses [vitest](https://vitest.dev) to syntax highlight `test/data/*.cedar` and `test/data/*.cedarschema` files and compares against a generated `.html`
-[File Snapshots](https://vitest.dev/guide/snapshot.html#file-snapshots) for each Cedar and Cedar human-readable schema file.
+[File Snapshots](https://vitest.dev/guide/snapshot.html#file-snapshots) for each Cedar and Cedar schema file.
 
 View either the static `test/static/index.html` on your browser or `npm run dev` and `test/vite/index.html` renders in your browser:  <http://localhost:5173/>
 

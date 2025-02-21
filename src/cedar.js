@@ -7,7 +7,7 @@ Website: https://www.cedarpolicy.com/
 */
 export function hljsCedar(hljs) {
   const GLOBALS = {
-    match: /\b(?:ip|decimal)(?=\()/,
+    match: /\b(?:ip|decimal|datetime|duration)(?=\()/,
     scope: 'built_in',
   };
 
@@ -100,6 +100,17 @@ export function hljsCedar(hljs) {
     relevance: 0,
   };
 
+  const DATETIME_METHODS = {
+    scope: 'title.function.invoke',
+    begin: `(?=\.)(offset|durationSince|toDate|toTime)(?=\\()`,
+    relevance: 0,
+  };
+  const DURATION_METHODS = {
+    scope: 'title.function.invoke',
+    begin: `(?=\.)(toMilliseconds|toSeconds|toMinutes|toHours|toDays)(?=\\()`,
+    relevance: 0,
+  };
+
   return {
     name: 'Cedar',
     aliases: ['cedar'],
@@ -119,6 +130,8 @@ export function hljsCedar(hljs) {
       METHODS,
       DECIMAL_METHODS,
       IP_METHODS,
+      DATETIME_METHODS,
+      DURATION_METHODS,
       TEMPLATES,
     ],
   };
