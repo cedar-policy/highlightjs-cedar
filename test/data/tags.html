@@ -1,0 +1,11 @@
+<span class="hljs-keyword">entity</span> User <span class="hljs-operator">=</span> <span class="hljs-punctuation">{</span>
+  <span class="hljs-property">jobLevel</span>: Long,
+<span class="hljs-punctuation">}</span> <span class="hljs-keyword">tags</span> Set&lt;String&gt;<span class="hljs-punctuation">;</span>
+<span class="hljs-keyword">entity</span> Document <span class="hljs-operator">=</span> <span class="hljs-punctuation">{</span>
+  <span class="hljs-property">owner</span>: User,
+<span class="hljs-punctuation">}</span> <span class="hljs-keyword">tags</span> Set&lt;String&gt;<span class="hljs-punctuation">;</span>
+<span class="hljs-keyword">action</span> <span class="hljs-string">&quot;writeDoc&quot;</span> <span class="hljs-keyword">appliesTo</span> <span class="hljs-punctuation">{</span>
+  <span class="hljs-property">principal</span>: <span class="hljs-punctuation">[</span>User<span class="hljs-punctuation">]</span>,
+  <span class="hljs-property">resource</span>: <span class="hljs-punctuation">[</span>Document<span class="hljs-punctuation">]</span>,
+  <span class="hljs-property">context</span>: <span class="hljs-punctuation">{</span><span class="hljs-punctuation">}</span>
+<span class="hljs-punctuation">}</span><span class="hljs-punctuation">;</span>
