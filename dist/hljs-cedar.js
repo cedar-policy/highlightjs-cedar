@@ -2,7 +2,7 @@
   // src/cedar.js
   function hljsCedar(hljs) {
     const GLOBALS = {
-      match: /\b(?:ip|decimal)(?=\()/,
+      match: /\b(?:ip|decimal|datetime|duration)(?=\()/,
       scope: "built_in"
     };
     const VARIABLES = {
@@ -64,7 +64,7 @@
     };
     const METHODS = {
       scope: "title.function.invoke",
-      begin: `(?=.)(contains|containsAll|containsAny)(?=\\()`,
+      begin: `(?=.)(contains|containsAll|containsAny|isEmpty|getTag|hasTag)(?=\\()`,
       relevance: 0
     };
     const DECIMAL_METHODS = {
@@ -75,6 +75,16 @@
     const IP_METHODS = {
       scope: "title.function.invoke",
       begin: `(?=.)(isIpv4|isIpv6|isLoopback|isMulticast|isInRange)(?=\\()`,
+      relevance: 0
+    };
+    const DATETIME_METHODS = {
+      scope: "title.function.invoke",
+      begin: `(?=.)(offset|durationSince|toDate|toTime)(?=\\()`,
+      relevance: 0
+    };
+    const DURATION_METHODS = {
+      scope: "title.function.invoke",
+      begin: `(?=.)(toMilliseconds|toSeconds|toMinutes|toHours|toDays)(?=\\()`,
       relevance: 0
     };
     return {
@@ -96,6 +106,8 @@
         METHODS,
         DECIMAL_METHODS,
         IP_METHODS,
+        DATETIME_METHODS,
+        DURATION_METHODS,
         TEMPLATES
       ]
     };
@@ -106,7 +118,7 @@
       scope: "keyword"
     };
     const MOREKEYWORDS = {
-      begin: "\\b(?:in)\\b|\\b(?:appliesTo)(?=\\s*{)",
+      begin: "\\b(?:in)\\b|\\b(?:appliesTo)(?=\\s*{)|(?<=}\\s*)(?:tags)\\b",
       scope: "keyword"
     };
     const OPERATORS = {
