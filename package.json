@@ -29,7 +29,7 @@
   "devDependencies": {
     "highlight.js": "^11.11.1",
     "prettier": "^3.5.2",
-    "vite": "^6.2.5",
+    "vite": "^6.2.6",
     "vitest": "^3.0.7"
   }
 }
