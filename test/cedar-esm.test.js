@@ -35,3 +35,22 @@ describe('data/*.cedar files', () => {
 describe('data/*.cedarschema files', () => {
   processLanguage('cedarschema');
 });
+
+// A .cedar and a .cedarschema input sharing a base name would both snapshot to
+// <base>.html and silently overwrite each other, so guard against it.
+describe('data/ snapshot targets', () => {
+  it('no two inputs map to the same .html snapshot', () => {
+    const seen = new Map();
+    const collisions = [];
+    fs.readdirSync(path.join(__dirname, 'data'))
+      .filter((f) => f.endsWith('.cedar') || f.endsWith('.cedarschema'))
+      .forEach((file) => {
+        const html = file.replace(/\.cedarschema$|\.cedar$/, '.html');
+        if (seen.has(html)) {
+          collisions.push(`${seen.get(html)} and ${file} both map to ${html}`);
+        }
+        seen.set(html, file);
+      });
+    expect(collisions).toEqual([]);
+  });
+});

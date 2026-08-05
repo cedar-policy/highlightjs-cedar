@@ -1,0 +1,38 @@
+<span class="hljs-comment">// AttrDecls := Annotations Name [&#x27;?&#x27;] &#x27;:&#x27; Type [&#x27;,&#x27; | &#x27;,&#x27; AttrDecls]</span>
+<span class="hljs-comment">// Name      := IDENT | STR</span>
+<span class="hljs-comment">// see https://docs.cedarpolicy.com/schema/human-readable-schema-grammar.html</span>
+<span class="hljs-keyword">namespace</span> <span class="hljs-title class_">NS</span> <span class="hljs-punctuation">{</span>
+  <span class="hljs-comment">// a quoted attribute name is a Name, not a string value</span>
+  <span class="hljs-keyword">type</span> Quoted <span class="hljs-operator">=</span> <span class="hljs-punctuation">{</span>
+    <span class="hljs-property">&quot;id&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-type">Long</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-property">&quot;name&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-type">String</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-property">&quot;owner info&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-type">String</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-punctuation">}</span><span class="hljs-punctuation">;</span>
+
+  <span class="hljs-comment">// optional attributes</span>
+  <span class="hljs-keyword">entity</span> Resource <span class="hljs-punctuation">{</span>
+    <span class="hljs-property">metadata</span>?<span class="hljs-punctuation">:</span> <span class="hljs-type">String</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-property">required</span><span class="hljs-punctuation">:</span> <span class="hljs-type">Long</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-property">&quot;quoted optional&quot;</span>?<span class="hljs-punctuation">:</span> <span class="hljs-type">Bool</span>
+  <span class="hljs-punctuation">}</span><span class="hljs-punctuation">;</span>
+
+  <span class="hljs-comment">// words that are keywords elsewhere are legal attribute names</span>
+  <span class="hljs-keyword">type</span> Names <span class="hljs-operator">=</span> <span class="hljs-punctuation">{</span>
+    <span class="hljs-property">&quot;type&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-title class_">__cedar::String</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-property">namespace</span><span class="hljs-punctuation">:</span> <span class="hljs-type">String</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-property">entity</span><span class="hljs-punctuation">:</span> <span class="hljs-type">String</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-property">action</span><span class="hljs-punctuation">:</span> <span class="hljs-type">String</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-property">enum</span><span class="hljs-punctuation">:</span> <span class="hljs-type">Long</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-property">tags</span><span class="hljs-punctuation">:</span> <span class="hljs-type">Bool</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-property">Set</span><span class="hljs-punctuation">:</span> <span class="hljs-type">Long</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-property">appliesTo</span><span class="hljs-punctuation">:</span> <span class="hljs-type">Bool</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-comment">// `in` is a reserved identifier, so it is only legal quoted</span>
+    <span class="hljs-property">&quot;in&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-type">String</span>
+  <span class="hljs-punctuation">}</span><span class="hljs-punctuation">;</span>
+
+  <span class="hljs-comment">// an ordinary string containing a colon is still a string</span>
+  <span class="hljs-meta">@doc</span><span class="hljs-punctuation">(</span><span class="hljs-string">&quot;id: the task id&quot;</span><span class="hljs-punctuation">)</span>
+  <span class="hljs-keyword">entity</span> Doc <span class="hljs-operator">=</span> <span class="hljs-punctuation">{</span>
+    <span class="hljs-property">url</span><span class="hljs-punctuation">:</span> <span class="hljs-type">String</span>
+  <span class="hljs-punctuation">}</span><span class="hljs-punctuation">;</span>
+<span class="hljs-punctuation">}</span>
