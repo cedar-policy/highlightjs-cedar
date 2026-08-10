@@ -1,11 +1,40 @@
+<span class="hljs-comment">// https://github.com/cedar-policy/rfcs/blob/main/text/0082-entity-tags.md</span>
+<span class="hljs-comment">// Entity := ... &#x27;entity&#x27; Idents [&#x27;in&#x27; EntOrTyps] [[&#x27;=&#x27;] RecType] [&#x27;tags&#x27; Type] &#x27;;&#x27;</span>
 <span class="hljs-keyword">entity</span> User <span class="hljs-operator">=</span> <span class="hljs-punctuation">{</span>
-  <span class="hljs-property">jobLevel</span>: Long,
-<span class="hljs-punctuation">}</span> <span class="hljs-keyword">tags</span> Set&lt;String&gt;<span class="hljs-punctuation">;</span>
+  <span class="hljs-property">jobLevel</span><span class="hljs-punctuation">:</span> <span class="hljs-type">Long</span><span class="hljs-punctuation">,</span>
+<span class="hljs-punctuation">}</span> <span class="hljs-keyword">tags</span> <span class="hljs-type">Set</span><span class="hljs-punctuation">&lt;</span><span class="hljs-type">String</span><span class="hljs-punctuation">&gt;</span><span class="hljs-punctuation">;</span>
 <span class="hljs-keyword">entity</span> Document <span class="hljs-operator">=</span> <span class="hljs-punctuation">{</span>
-  <span class="hljs-property">owner</span>: User,
-<span class="hljs-punctuation">}</span> <span class="hljs-keyword">tags</span> Set&lt;String&gt;<span class="hljs-punctuation">;</span>
+  <span class="hljs-property">owner</span><span class="hljs-punctuation">:</span> User<span class="hljs-punctuation">,</span>
+<span class="hljs-punctuation">}</span> <span class="hljs-keyword">tags</span> <span class="hljs-type">Set</span><span class="hljs-punctuation">&lt;</span><span class="hljs-type">String</span><span class="hljs-punctuation">&gt;</span><span class="hljs-punctuation">;</span>
 <span class="hljs-keyword">action</span> <span class="hljs-string">&quot;writeDoc&quot;</span> <span class="hljs-keyword">appliesTo</span> <span class="hljs-punctuation">{</span>
-  <span class="hljs-property">principal</span>: <span class="hljs-punctuation">[</span>User<span class="hljs-punctuation">]</span>,
-  <span class="hljs-property">resource</span>: <span class="hljs-punctuation">[</span>Document<span class="hljs-punctuation">]</span>,
-  <span class="hljs-property">context</span>: <span class="hljs-punctuation">{</span><span class="hljs-punctuation">}</span>
+  <span class="hljs-property">principal</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span>User<span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-property">resource</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span>Document<span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-property">context</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span><span class="hljs-punctuation">}</span>
+<span class="hljs-punctuation">}</span><span class="hljs-punctuation">;</span>
+
+<span class="hljs-comment">// RecType is optional, so tags does not require a preceding &#x27;}&#x27;</span>
+<span class="hljs-keyword">entity</span> Plain <span class="hljs-keyword">tags</span> <span class="hljs-type">String</span><span class="hljs-punctuation">;</span>
+<span class="hljs-keyword">entity</span> Parented <span class="hljs-keyword">in</span> <span class="hljs-punctuation">[</span>User<span class="hljs-punctuation">]</span> <span class="hljs-keyword">tags</span> <span class="hljs-type">Set</span><span class="hljs-punctuation">&lt;</span><span class="hljs-type">String</span><span class="hljs-punctuation">&gt;</span><span class="hljs-punctuation">;</span>
+<span class="hljs-keyword">entity</span> BareParent <span class="hljs-keyword">in</span> User <span class="hljs-keyword">tags</span> <span class="hljs-type">Set</span><span class="hljs-punctuation">&lt;</span><span class="hljs-type">Set</span><span class="hljs-punctuation">&lt;</span><span class="hljs-type">String</span><span class="hljs-punctuation">&gt;</span><span class="hljs-punctuation">&gt;</span><span class="hljs-punctuation">;</span>
+<span class="hljs-keyword">entity</span> Recordy <span class="hljs-keyword">tags</span> <span class="hljs-punctuation">{</span> <span class="hljs-property">note</span><span class="hljs-punctuation">:</span> <span class="hljs-type">String</span> <span class="hljs-punctuation">}</span><span class="hljs-punctuation">;</span>
+
+<span class="hljs-comment">// an attribute or entity named tags is not the tags keyword</span>
+<span class="hljs-keyword">entity</span> Attr <span class="hljs-operator">=</span> <span class="hljs-punctuation">{</span>
+  <span class="hljs-property">tags</span><span class="hljs-punctuation">:</span> <span class="hljs-type">Bool</span>
+<span class="hljs-punctuation">}</span><span class="hljs-punctuation">;</span>
+<span class="hljs-keyword">entity</span> tags<span class="hljs-punctuation">;</span>
+<span class="hljs-keyword">type</span> tags2 <span class="hljs-operator">=</span> <span class="hljs-type">Long</span><span class="hljs-punctuation">;</span>
+
+<span class="hljs-comment">// nor is a declared name that happens to be followed by more declaration.</span>
+<span class="hljs-comment">// each uses a distinct name, since a name may only be declared once.</span>
+<span class="hljs-keyword">entity</span> tagsParented <span class="hljs-keyword">in</span> Attr<span class="hljs-punctuation">;</span>
+<span class="hljs-keyword">entity</span> tagsShaped <span class="hljs-operator">=</span> <span class="hljs-punctuation">{</span> <span class="hljs-property">a</span><span class="hljs-punctuation">:</span> <span class="hljs-type">Long</span> <span class="hljs-punctuation">}</span><span class="hljs-punctuation">;</span>
+<span class="hljs-keyword">action</span> tags <span class="hljs-keyword">appliesTo</span> <span class="hljs-punctuation">{</span> <span class="hljs-property">principal</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span>Attr<span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span> <span class="hljs-property">resource</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span>Attr<span class="hljs-punctuation">]</span> <span class="hljs-punctuation">}</span><span class="hljs-punctuation">;</span>
+<span class="hljs-keyword">entity</span> First<span class="hljs-punctuation">,</span> tagsLast<span class="hljs-punctuation">;</span>
+
+<span class="hljs-comment">// a qualified type keeps its whole path, even when the last segment is a</span>
+<span class="hljs-comment">// reserved type name</span>
+<span class="hljs-keyword">entity</span> Qualified <span class="hljs-operator">=</span> <span class="hljs-punctuation">{</span>
+  <span class="hljs-property">a</span><span class="hljs-punctuation">:</span> <span class="hljs-title class_">__cedar::String</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-property">b</span><span class="hljs-punctuation">:</span> <span class="hljs-type">Set</span><span class="hljs-punctuation">&lt;</span><span class="hljs-title class_">__cedar::Long</span><span class="hljs-punctuation">&gt;</span>
 <span class="hljs-punctuation">}</span><span class="hljs-punctuation">;</span>

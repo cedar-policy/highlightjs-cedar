@@ -1,0 +1,38 @@
+<span class="hljs-comment">// Namespace := (Annotations &#x27;namespace&#x27; Path &#x27;{&#x27; {Decl} &#x27;}&#x27;) | Decl</span>
+<span class="hljs-comment">// Entity    := ... &#x27;entity&#x27; Idents [&#x27;in&#x27; EntOrTyps] [[&#x27;=&#x27;] RecType] [&#x27;tags&#x27; Type] &#x27;;&#x27;</span>
+<span class="hljs-comment">//            | ... &#x27;entity&#x27; Idents &#x27;enum&#x27; &#x27;[&#x27; STR+ &#x27;]&#x27; &#x27;;&#x27;</span>
+<span class="hljs-comment">// see https://docs.cedarpolicy.com/schema/human-readable-schema-grammar.html</span>
+
+<span class="hljs-comment">// a namespace name is a Path, not a single IDENT</span>
+<span class="hljs-keyword">namespace</span> <span class="hljs-title class_">Foo::Bar::Baz</span> <span class="hljs-punctuation">{</span>
+  <span class="hljs-keyword">entity</span> E<span class="hljs-punctuation">;</span>
+<span class="hljs-punctuation">}</span>
+
+<span class="hljs-comment">// declarations are not line oriented</span>
+<span class="hljs-keyword">namespace</span> <span class="hljs-title class_">M</span> <span class="hljs-punctuation">{</span> <span class="hljs-keyword">entity</span> U<span class="hljs-punctuation">;</span> <span class="hljs-keyword">action</span> x <span class="hljs-keyword">appliesTo</span> <span class="hljs-punctuation">{</span> <span class="hljs-property">principal</span><span class="hljs-punctuation">:</span> U<span class="hljs-punctuation">,</span> <span class="hljs-property">resource</span><span class="hljs-punctuation">:</span> U <span class="hljs-punctuation">}</span><span class="hljs-punctuation">;</span> <span class="hljs-punctuation">}</span>
+
+<span class="hljs-comment">// &#x27;in&#x27; takes a single EntType or a bracketed list</span>
+<span class="hljs-keyword">entity</span> Album<span class="hljs-punctuation">,</span> Folder<span class="hljs-punctuation">,</span> Drive<span class="hljs-punctuation">;</span>
+<span class="hljs-keyword">entity</span> Photo <span class="hljs-keyword">in</span> Album<span class="hljs-punctuation">;</span>
+<span class="hljs-keyword">entity</span> Document <span class="hljs-keyword">in</span> <span class="hljs-punctuation">[</span>Folder<span class="hljs-punctuation">,</span> Drive<span class="hljs-punctuation">]</span><span class="hljs-punctuation">;</span>
+<span class="hljs-keyword">action</span> <span class="hljs-string">&quot;read&quot;</span><span class="hljs-punctuation">,</span> <span class="hljs-string">&quot;write&quot;</span><span class="hljs-punctuation">,</span> <span class="hljs-string">&quot;admin&quot;</span><span class="hljs-punctuation">;</span>
+<span class="hljs-keyword">action</span> view <span class="hljs-keyword">in</span> Action<span class="hljs-punctuation">::</span><span class="hljs-string">&quot;read&quot;</span><span class="hljs-punctuation">;</span>
+<span class="hljs-keyword">action</span> edit <span class="hljs-keyword">in</span> <span class="hljs-punctuation">[</span>Action<span class="hljs-punctuation">::</span><span class="hljs-string">&quot;write&quot;</span><span class="hljs-punctuation">,</span> Action<span class="hljs-punctuation">::</span><span class="hljs-string">&quot;admin&quot;</span><span class="hljs-punctuation">]</span><span class="hljs-punctuation">;</span>
+
+<span class="hljs-comment">// enumerated entity types</span>
+<span class="hljs-keyword">entity</span> Color <span class="hljs-keyword">enum</span> <span class="hljs-punctuation">[</span><span class="hljs-string">&quot;Red&quot;</span><span class="hljs-punctuation">,</span> <span class="hljs-string">&quot;Blue&quot;</span><span class="hljs-punctuation">,</span> <span class="hljs-string">&quot;Green&quot;</span><span class="hljs-punctuation">]</span><span class="hljs-punctuation">;</span>
+<span class="hljs-keyword">entity</span> Status <span class="hljs-keyword">enum</span> <span class="hljs-punctuation">[</span><span class="hljs-string">&quot;active&quot;</span><span class="hljs-punctuation">]</span><span class="hljs-punctuation">;</span>
+
+<span class="hljs-comment">// the &#x27;=&#x27; before a record shape is optional</span>
+<span class="hljs-keyword">entity</span> WithEquals <span class="hljs-operator">=</span> <span class="hljs-punctuation">{</span> <span class="hljs-property">a</span><span class="hljs-punctuation">:</span> <span class="hljs-type">Long</span> <span class="hljs-punctuation">}</span><span class="hljs-punctuation">;</span>
+<span class="hljs-keyword">entity</span> WithoutEquals <span class="hljs-punctuation">{</span> <span class="hljs-property">a</span><span class="hljs-punctuation">:</span> <span class="hljs-type">Long</span> <span class="hljs-punctuation">}</span><span class="hljs-punctuation">;</span>
+
+<span class="hljs-comment">// appliesTo may be omitted entirely, and may use bracketed or bare entity types</span>
+<span class="hljs-keyword">action</span> a1<span class="hljs-punctuation">;</span>
+<span class="hljs-keyword">action</span> a2 <span class="hljs-keyword">appliesTo</span> <span class="hljs-punctuation">{</span> <span class="hljs-property">principal</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><span class="hljs-title class_">Foo::Bar::Baz::E</span><span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span> <span class="hljs-property">resource</span><span class="hljs-punctuation">:</span> Photo<span class="hljs-punctuation">,</span> <span class="hljs-property">context</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span><span class="hljs-punctuation">}</span> <span class="hljs-punctuation">}</span><span class="hljs-punctuation">;</span>
+<span class="hljs-keyword">action</span> a3 <span class="hljs-keyword">appliesTo</span> <span class="hljs-punctuation">{</span> <span class="hljs-property">principal</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span>Photo<span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span> <span class="hljs-property">resource</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span>Document<span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span> <span class="hljs-punctuation">}</span><span class="hljs-punctuation">;</span>
+<span class="hljs-keyword">action</span> <span class="hljs-string">&quot;a b&quot;</span><span class="hljs-punctuation">,</span> <span class="hljs-string">&quot;a / b&quot;</span> <span class="hljs-keyword">in</span> <span class="hljs-string">&quot;a1&quot;</span> <span class="hljs-keyword">appliesTo</span> <span class="hljs-punctuation">{</span>
+  <span class="hljs-property">principal</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span>Photo<span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-property">resource</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span>Document<span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-property">context</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span> <span class="hljs-property">oldObject</span>?<span class="hljs-punctuation">:</span> <span class="hljs-type">String</span> <span class="hljs-punctuation">}</span>
+<span class="hljs-punctuation">}</span><span class="hljs-punctuation">;</span>

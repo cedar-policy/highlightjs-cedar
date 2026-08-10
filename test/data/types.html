@@ -1,0 +1,47 @@
+<span class="hljs-comment">// Type      := Path | SetType | RecType</span>
+<span class="hljs-comment">// SetType   := &#x27;Set&#x27; &#x27;&lt;&#x27; Type &#x27;&gt;&#x27;</span>
+<span class="hljs-comment">// PRIMTYPE  := &#x27;Long&#x27; | &#x27;String&#x27; | &#x27;Bool&#x27;</span>
+<span class="hljs-comment">// RESERVED  := &#x27;Bool&#x27; | &#x27;Boolean&#x27; | &#x27;Entity&#x27; | &#x27;Extension&#x27; | &#x27;Long&#x27; | &#x27;Record&#x27; | &#x27;Set&#x27; | &#x27;String&#x27;</span>
+<span class="hljs-comment">// see https://docs.cedarpolicy.com/schema/human-readable-schema-grammar.html</span>
+<span class="hljs-keyword">namespace</span> <span class="hljs-title class_">NS1</span> <span class="hljs-punctuation">{</span>
+  <span class="hljs-keyword">type</span> Primitives <span class="hljs-operator">=</span> <span class="hljs-punctuation">{</span>
+    <span class="hljs-property">b</span><span class="hljs-punctuation">:</span> <span class="hljs-type">Bool</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-property">l</span><span class="hljs-punctuation">:</span> <span class="hljs-type">Long</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-property">s</span><span class="hljs-punctuation">:</span> <span class="hljs-type">String</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-punctuation">}</span><span class="hljs-punctuation">;</span>
+  <span class="hljs-keyword">type</span> Sets <span class="hljs-operator">=</span> <span class="hljs-punctuation">{</span>
+    <span class="hljs-property">bs</span><span class="hljs-punctuation">:</span> <span class="hljs-type">Set</span><span class="hljs-punctuation">&lt;</span><span class="hljs-type">Bool</span><span class="hljs-punctuation">&gt;</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-property">ls</span><span class="hljs-punctuation">:</span> <span class="hljs-type">Set</span><span class="hljs-punctuation">&lt;</span><span class="hljs-type">Long</span><span class="hljs-punctuation">&gt;</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-property">nested</span><span class="hljs-punctuation">:</span> <span class="hljs-type">Set</span><span class="hljs-punctuation">&lt;</span><span class="hljs-type">Set</span><span class="hljs-punctuation">&lt;</span><span class="hljs-type">String</span><span class="hljs-punctuation">&gt;</span><span class="hljs-punctuation">&gt;</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-punctuation">}</span><span class="hljs-punctuation">;</span>
+  <span class="hljs-comment">// the extension types</span>
+  <span class="hljs-keyword">type</span> Functions <span class="hljs-operator">=</span> <span class="hljs-punctuation">{</span>
+    <span class="hljs-property">da</span><span class="hljs-punctuation">:</span> <span class="hljs-type">datetime</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-property">de</span><span class="hljs-punctuation">:</span> <span class="hljs-type">decimal</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-property">du</span><span class="hljs-punctuation">:</span> <span class="hljs-type">duration</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-property">ip</span><span class="hljs-punctuation">:</span> <span class="hljs-type">ipaddr</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-punctuation">}</span><span class="hljs-punctuation">;</span>
+  <span class="hljs-comment">// a common type reference is not a built-in type</span>
+  <span class="hljs-keyword">type</span> Both <span class="hljs-operator">=</span> <span class="hljs-punctuation">{</span>
+    <span class="hljs-property">p</span><span class="hljs-punctuation">:</span> Primitives<span class="hljs-punctuation">,</span>
+    <span class="hljs-property">f</span><span class="hljs-punctuation">:</span> Functions<span class="hljs-punctuation">,</span>
+  <span class="hljs-punctuation">}</span><span class="hljs-punctuation">;</span>
+  <span class="hljs-keyword">type</span> Alias <span class="hljs-operator">=</span> <span class="hljs-type">Long</span><span class="hljs-punctuation">;</span>
+  <span class="hljs-keyword">type</span> Listy <span class="hljs-operator">=</span> <span class="hljs-type">Set</span><span class="hljs-punctuation">&lt;</span>Primitives<span class="hljs-punctuation">&gt;</span><span class="hljs-punctuation">;</span>
+
+  <span class="hljs-keyword">entity</span> E <span class="hljs-punctuation">{</span>
+    <span class="hljs-property">p</span><span class="hljs-punctuation">:</span> Primitives<span class="hljs-punctuation">,</span>
+    <span class="hljs-property">q</span><span class="hljs-punctuation">:</span> <span class="hljs-title class_">NS1::Primitives</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-punctuation">}</span><span class="hljs-punctuation">;</span>
+<span class="hljs-punctuation">}</span>
+
+<span class="hljs-comment">// a declared name that collides with a reserved type name is still a name</span>
+<span class="hljs-keyword">namespace</span> <span class="hljs-title class_">Shadow</span> <span class="hljs-punctuation">{</span>
+  <span class="hljs-keyword">entity</span> String <span class="hljs-punctuation">{</span>
+    <span class="hljs-property">groups</span><span class="hljs-punctuation">:</span> <span class="hljs-type">Set</span><span class="hljs-punctuation">&lt;</span><span class="hljs-title class_">__cedar::String</span><span class="hljs-punctuation">&gt;</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-punctuation">}</span><span class="hljs-punctuation">;</span>
+  <span class="hljs-keyword">type</span> ipaddr <span class="hljs-operator">=</span> <span class="hljs-punctuation">{</span>
+    <span class="hljs-property">repr</span><span class="hljs-punctuation">:</span> <span class="hljs-type">String</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-property">isV4</span><span class="hljs-punctuation">:</span> <span class="hljs-type">Bool</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-punctuation">}</span><span class="hljs-punctuation">;</span>
+<span class="hljs-punctuation">}</span>

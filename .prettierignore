@@ -4,4 +4,5 @@ dist
 *.min.*
 test/data/*
 *.md
+!README.md
 .github

@@ -1,0 +1,33 @@
+<span class="hljs-comment">// Annotation := &#x27;@&#x27; IDENT &#x27;(&#x27; STR &#x27;)&#x27;</span>
+<span class="hljs-comment">// see https://docs.cedarpolicy.com/schema/human-readable-schema-grammar.html</span>
+<span class="hljs-meta">@doc</span><span class="hljs-punctuation">(</span><span class="hljs-string">&quot;this is the namespace&quot;</span><span class="hljs-punctuation">)</span>
+<span class="hljs-keyword">namespace</span> <span class="hljs-title class_">TinyTodo</span> <span class="hljs-punctuation">{</span>
+  <span class="hljs-meta">@doc</span><span class="hljs-punctuation">(</span><span class="hljs-string">&quot;a common type representing a task&quot;</span><span class="hljs-punctuation">)</span>
+  <span class="hljs-keyword">type</span> Task <span class="hljs-operator">=</span> <span class="hljs-punctuation">{</span>
+    <span class="hljs-meta">@doc</span><span class="hljs-punctuation">(</span><span class="hljs-string">&quot;task id&quot;</span><span class="hljs-punctuation">)</span>
+    <span class="hljs-property">&quot;id&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-type">Long</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-property">&quot;name&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-type">String</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-punctuation">}</span><span class="hljs-punctuation">;</span>
+
+  <span class="hljs-meta">@doc</span><span class="hljs-punctuation">(</span><span class="hljs-string">&quot;an entity type representing a list&quot;</span><span class="hljs-punctuation">)</span>
+  <span class="hljs-meta">@docComment</span><span class="hljs-punctuation">(</span><span class="hljs-string">&quot;any entity type is a child of type `Application`&quot;</span><span class="hljs-punctuation">)</span>
+  <span class="hljs-keyword">entity</span> List <span class="hljs-keyword">in</span> <span class="hljs-punctuation">[</span>Application<span class="hljs-punctuation">]</span> <span class="hljs-operator">=</span> <span class="hljs-punctuation">{</span>
+    <span class="hljs-meta">@doc</span><span class="hljs-punctuation">(</span><span class="hljs-string">&quot;editors of a list&quot;</span><span class="hljs-punctuation">)</span>
+    <span class="hljs-property">&quot;editors&quot;</span><span class="hljs-punctuation">:</span> Team<span class="hljs-punctuation">,</span>
+    <span class="hljs-property">&quot;name&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-type">String</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-punctuation">}</span><span class="hljs-punctuation">;</span>
+
+  <span class="hljs-keyword">entity</span> Application<span class="hljs-punctuation">,</span> Team<span class="hljs-punctuation">;</span>
+
+  <span class="hljs-meta">@doc</span><span class="hljs-punctuation">(</span><span class="hljs-string">&quot;actions that a user can operate on a list&quot;</span><span class="hljs-punctuation">)</span>
+  <span class="hljs-keyword">action</span> DeleteList<span class="hljs-punctuation">,</span> GetList <span class="hljs-keyword">appliesTo</span> <span class="hljs-punctuation">{</span>
+    <span class="hljs-property">principal</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span>Team<span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-property">resource</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span>List<span class="hljs-punctuation">]</span>
+  <span class="hljs-punctuation">}</span><span class="hljs-punctuation">;</span>
+<span class="hljs-punctuation">}</span>
+
+<span class="hljs-comment">// the value is optional, and a &#x27;@&#x27; inside a string is not an annotation</span>
+<span class="hljs-meta">@internal</span>
+<span class="hljs-keyword">entity</span> Marker <span class="hljs-operator">=</span> <span class="hljs-punctuation">{</span>
+  <span class="hljs-property">note</span><span class="hljs-punctuation">:</span> <span class="hljs-type">String</span>
+<span class="hljs-punctuation">}</span><span class="hljs-punctuation">;</span>
